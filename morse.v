@@ -3,21 +3,20 @@ module morse (
     input clk,
     input button0,
 
-    output reg dot_out,
-    output reg dash_out,
-
-    output reg interchar_out,
-    output reg interword_out,
+    output reg [9:0] saida,
     output [6:0] HEX0
 );
 
-reg read;
+wire read;
+reg read_in;
+wire [9:0] temp_array;
 wire dot;
 wire dash;
 
 wire interchar;
 wire interword;
 
+wire complete;
 wire writing;
 wire [3:0] tempo;
 
@@ -42,20 +41,35 @@ timing inst_timing (
     .t(tempo)
 );
 
-always @(posedge clk) begin    
+receiving inst_receiving(
+    // inputs
+    .clk(clk),
+    .reset(reset),
+    .writing(writing),
+    .dot(dot),
+    .dash(dash),
+    .interchar(interchar),
+    .read_in(read_in),
+
+    // outputs
+    .read_out(read),
+    .data_out(temp_array),
+    .complete(complete)
+);
+
+
+always @(posedge clk) begin
+    
     if (reset) begin
-        read = 0;
+        read_in = 0;
+		  saida = 0;
+    end else if (complete) begin
+        saida = temp_array;
+        read_in = 1;
     end else begin
-        if (writing) begin
-            dot_out = dot;
-            dash_out = dash; 
-            interchar_out = interchar;   
-            interword_out = interword;
-            read = 1;
-        end else begin
-            read = 0;
-        end
+        read_in = 0;
     end
 end
+
 
 endmodule

@@ -55,9 +55,9 @@ always @(posedge clk) begin
                 end
             end 
             1: begin // analise do tempo que ficou sem apertar botão
-                if (t <= 3 && t > 1 && !read) begin // espaço entre caracteres
+                if ((t <= 3) && (t > 1) && (!read)) begin // espaço entre caracteres
                     interchar = 1;
-                end else if (t > 3 && !read) begin
+                end else if ((t > 3) && (!read)) begin
                     interword = 1;
                 end else if (read) begin
                     state = 2;

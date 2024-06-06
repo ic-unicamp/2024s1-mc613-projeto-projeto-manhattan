@@ -6,7 +6,7 @@ JedecChain;
 	P ActionCode(Ign)
 		Device PartName(SOCVHPS) MfrSpec(OpMask(0));
 	P ActionCode(Cfg)
-		Device PartName(5CSEMA5F31) Path("/home/ec2022/ra260551/Downloads/MC613/Projeto Morse/output_files/") File("morse.sof") MfrSpec(OpMask(1));
+		Device PartName(5CSEMA5F31) Path("/home/ec2022/ra260551/Downloads/MC613/Projeto Morse/2024s1-mc613-projeto-projeto-manhattan/output_files/") File("morse.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

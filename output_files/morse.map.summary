@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Wed May 29 14:29:57 2024
+Analysis & Synthesis Status : Successful - Wed Jun  5 17:49:51 2024
 Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 Revision Name : morse
 Top-level Entity Name : morse
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 592
-Total pins : 15
+Total registers : 635
+Total pins : 20
 Total virtual pins : 0
-Total block memory bits : 1,152
+Total block memory bits : 2,432
 Total DSP Blocks : 0
 Total HSSI RX PCSs : 0
 Total HSSI PMA RX Deserializers : 0
