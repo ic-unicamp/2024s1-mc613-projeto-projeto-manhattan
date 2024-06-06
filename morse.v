@@ -8,7 +8,6 @@ module morse (
 );
 
 wire read;
-reg read_in;
 wire [9:0] temp_array;
 wire dot;
 wire dash;
@@ -16,7 +15,6 @@ wire dash;
 wire interchar;
 wire interword;
 
-wire complete;
 wire writing;
 wire [3:0] tempo;
 
@@ -41,35 +39,31 @@ timing inst_timing (
     .t(tempo)
 );
 
-receiving inst_receiving(
-    // inputs
+receiving inst_receiving (
+    //inputs
     .clk(clk),
     .reset(reset),
     .writing(writing),
     .dot(dot),
     .dash(dash),
+    .interword(interword),
     .interchar(interchar),
-    .read_in(read_in),
 
     // outputs
     .read_out(read),
-    .data_out(temp_array),
-    .complete(complete)
+    .data_out(temp_array)
 );
+
 
 
 always @(posedge clk) begin
     
     if (reset) begin
-        read_in = 0;
-		  saida = 0;
-    end else if (complete) begin
+		saida = 0;
+    end else if ((interchar || interword) && temp_array != 0) begin
         saida = temp_array;
-        read_in = 1;
-    end else begin
-        read_in = 0;
     end
-end
 
+end
 
 endmodule

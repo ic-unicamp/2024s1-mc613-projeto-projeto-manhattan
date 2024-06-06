@@ -1,5 +1,5 @@
 # Projeto final de MC613 - 2024s1
-https://prod.liveshare.vsengsaas.visualstudio.com/join?C646F955162AC1DCCA5908389F60573C9F2F
+https://prod.liveshare.vsengsaas.visualstudio.com/join?332EE9D09FFA244932532AD0FF031435090D
 Grupo:
 
 - RA - Nome

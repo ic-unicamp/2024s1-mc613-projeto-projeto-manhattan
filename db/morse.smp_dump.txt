@@ -1,4 +1,26 @@
 
+State Machine - |morse|receiving:inst_receiving|state
+Name state.010010 state.010001 state.010000 state.001111 state.001110 state.001101 state.001100 state.001011 state.001010 state.001001 state.001000 state.000111 state.000110 state.000101 state.000100 state.000011 state.000010 state.000001 state.000000 
+state.000000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+state.000001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+state.000010 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+state.000011 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+state.000100 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+state.000101 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+state.000110 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+state.000111 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+state.001000 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+state.001001 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+state.001010 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+state.001011 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+state.001100 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+state.001101 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.001110 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.001111 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.010000 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.010001 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.010010 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
 State Machine - |morse|timing:inst_timing|state
 Name state.011 state.010 state.001 state.000 
 state.000 0 0 0 0 
