@@ -19,7 +19,7 @@ always @(posedge clk) begin
         state = 0;
     end else begin
         case (state)
-            : 
+            0:  
             default: 
         endcase
     end
