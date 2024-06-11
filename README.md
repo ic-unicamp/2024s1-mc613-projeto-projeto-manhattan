@@ -1,10 +1,9 @@
 # Projeto final de MC613 - 2024s1
-https://prod.liveshare.vsengsaas.visualstudio.com/join?332EE9D09FFA244932532AD0FF031435090D
+https://prod.liveshare.vsengsaas.visualstudio.com/join?B1189BE5DB573447DA61B2EF5DEEB69EDFFD
 Grupo:
 
 - RA - Nome
 - RA - Nome
-- RA: 10 - Neymar Jr XD
 
 ## Descrição
 
