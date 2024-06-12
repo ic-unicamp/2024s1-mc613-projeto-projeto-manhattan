@@ -1,0 +1,33 @@
+module image (
+    input clk,
+    input reset,
+    input [9:0] char,
+    input printable,
+    output [7:0] VGA_R,
+    output [7:0] VGA_G,
+    output [7:0] VGA_B,
+    output [7:0] VGA_R,
+    output [7:0] VGA_G,
+    output [7:0] VGA_B
+);
+
+parameter size = 900;
+reg [10:0] pos;
+
+
+always @(posedge clk) begin
+    if (reset) begin
+        pos = 0;
+    end else if (printable) begin
+        pos = pos + 1;
+        if (pos == size) begin
+            pos = 0;
+        end
+    end
+end
+
+VGA_R = (printable) ? char[pos]:0
+VGA_G = (printable) ? char[pos]:0
+VGA_B = (printable) ? char[pos]:0
+
+endmodule
