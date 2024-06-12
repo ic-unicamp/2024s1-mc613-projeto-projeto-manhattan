@@ -1,0 +1,413 @@
+module receiving (
+    input clk,
+    input reset,
+    input dot,
+    input dash,
+    input interword,
+    input interchar,
+
+    output reg [9:0] data_out,
+    output reg [5:0] state
+);
+
+parameter dt = 1;       // dot
+parameter ds = 2;       // dash
+parameter dtdt = 3;     // dot dot
+parameter dtds = 4;     // dot dash
+always @(posedge clk) begin
+    if (reset) begin
+        data_out = 0; // Null
+        state = 0;
+    end else begin
+        case (state)
+            0: begin
+                if (dot) begin
+                    state = 1;
+                end else if (dash) begin
+                    state = 2;
+                end else begin
+                   data_out = 0; // Null
+                end
+            end
+            1: begin // está em => dot
+                if (dot) begin // vai para => dot dot
+                    state = 3;
+                end else if (dash) begin // vai para => dot dash
+                    state = 4;
+                end else if (interchar || interword) begin
+                    data_out = dt;
+                    state = 0;
+                end else begin
+                    state = 1;
+                end
+
+            end
+            2: begin // está em => dash
+                if (dot) begin  // vai para => dash dot
+                    state = 5;
+                end else if (dash) begin // vai para => dash dash
+                    state = 6;
+                end else if (interchar || interword) begin
+                    data_out = ds;
+                    state = 0;
+                end else begin
+                    state = 2;
+                end
+            end
+            3: begin  // está  em => dot dot
+                if (dot) begin  // vai para => dot dot dot
+                    state = 7;
+                end else if (dash) begin // vai para => dot dot dash
+                    state = 8;
+                end else if (interchar || interword) begin
+                    data_out = 255;
+                    state = 0;
+                end else begin
+                    state = 3;
+                end
+            end
+            4: begin    // está em => dot dash
+                if (dot) begin  // vai para => dot dash dot
+                    state = 9;
+                end else if (dash) begin // vai para => dot dash dash
+                    state = 10;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 4;
+                end
+            end
+            5: begin    // está em => dash dot
+                if (dot) begin  // vai para => dash dot dot 
+                    state = 11;
+                end else if (dash) begin // vai para => dash dot dash
+                    state = 12;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 5;
+                end
+            end
+            
+            6: begin    // está em => dash dash
+                if (dot) begin  // vai para => dash dash dot 
+                    state = 13;
+                end else if (dash) begin // vai para => dash dash dash
+                    state = 14;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 6;
+                end
+            end
+            
+            7: begin    // está em => dot dot dot
+                if (dot) begin  // vai para => dot dot dot dot
+                    state = 15;
+                end else if (dash) begin // vai para => dot dot dot dash
+                    state = 16;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 7;
+                end
+            end
+            
+            8: begin    // está em => dot dot dash
+                if (dot) begin  // vai para => dot dot dash dot
+                    state = 17;
+                end else if (dash) begin // vai para => dot dot dash dash
+                    state = 18;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 8;
+                end
+            end                      
+
+            9: begin    // está em => dot dash dot
+                if (dot) begin  // vai para => dot dash dot dot
+                    state = 19;
+                end else if (dash) begin // vai para => dot dash dot dash
+                    state = 20;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 9;
+                end
+            end 
+            
+            10: begin    // está em => dot dash dash
+                if (dot) begin  // vai para => dot dash dash dot
+                    state = 20;
+                end else if (dash) begin // vai para => dot dash dash dash
+                    state = 21;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 10;
+                end
+            end 
+
+           11: begin    // está em => dash dot dot
+                if (dot) begin  // vai para => dash dot dot dot
+                    state = 20;
+                end else if (dash) begin // vai para => dash dot dot dash
+                    state = 21;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 11;
+                end
+            end
+
+            12: begin    // está em => dash dot dash
+                if (dot) begin  // vai para => dash dot dash dot 
+                    state = 21;
+                end else if (dash) begin // vai para => dash dot dash dash
+                    state = 22;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 12;
+                end
+            end
+            13: begin    // está em => dash dash dot 
+                if (dot) begin  // vai para => dash dash dot dot
+                    state = 22;
+                end else if (dash) begin // vai para => dash dash dot dash
+                    state = 23;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 13;
+                end
+            end
+            
+            14: begin    // está em => dash dash dash
+                if (dot) begin  // vai para => dash dash dash dot 
+                    state = 23;
+                end else if (dash) begin // vai para => dash dash dash dash
+                    state = 24;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 14;
+                end
+            end
+
+            15: begin    // está em => dot dot dot dot
+                if (dot) begin  // vai para => dot dot dot dot dot  
+                    state = 22;
+                end else if (dash) begin // vai para => dot dot dot dot dash
+                    state = 23;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 15;
+                end
+            end
+
+            16: begin    // está em => dot dot dot dash
+                if (dot) begin  // vai para => dot dot dot dash dot
+                    state = 23;
+                end else if (dash) begin // vai para => dot dot dot dash dash
+                    state = 24;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 16;
+                end
+            end
+
+            17: begin    // está em => dot dot dash dot
+                if (dot) begin  // vai para => dot dot dash dot dot
+                    state = 23;
+                end else if (dash) begin // vai para => dot dot dash dot dash
+                    state = 24;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 17;
+                end
+            end
+
+            18: begin    // está em => dot dot dash dash
+                if (dot) begin  // vai para => dot dot dash dash dot
+                    state = 24;
+                end else if (dash) begin // vai para => dot dot dash dash dash
+                    state = 25;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 18;
+                end
+            end
+
+            19: begin    // está em => dot dash dot dot
+                if (dot) begin  // vai para => dot dash dot dot dot
+                    state = 24;
+                end else if (dash) begin // vai para => dot dash dot dot dash
+                    state = 25;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 19;
+                end
+            end
+
+            20: begin    // está em => dot dash dot dash
+                if (dot) begin  // vai para => dot dash dot dash dot
+                    state = 25;
+                end else if (dash) begin // vai para => dot dash dot dash dash
+                    state = 26;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 20;
+                end
+            end
+
+            21: begin    // está em => dot dash dash dot
+                if (dot) begin  // vai para => dot dash dash dot dot
+                    state = 26;
+                end else if (dash) begin // vai para => dot dash dash dot dash
+                    state = 27;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 21;
+                end
+            end
+
+            22: begin    // está em => dash dot dot dot
+                if (dot) begin  // vai para => dash dot dot dot dot
+                    state = 26;
+                end else if (dash) begin // vai para => dash dot dot dot dash
+                    state = 27;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 22;
+                end
+            end
+
+            23: begin    // está em => dash dot dot dash
+                if (dot) begin  // vai para => dash dot dot dash dot
+                    state = 27;
+                end else if (dash) begin // vai para => dash dot dot dash dash
+                    state = 28;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 23;
+                end
+            end
+
+            24: begin    // está em => dash dot dash dot
+                if (dot) begin  // vai para => dash dot dash dot dot
+                    state = 27;
+                end else if (dash) begin // vai para => dash dot dash dot dash
+                    state = 28;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 24;
+                end
+            end
+
+            25: begin    // está em => dash dot dash dash
+                if (dot) begin  // vai para => dash dot dash dash dot
+                    state = 28;
+                end else if (dash) begin // vai para => dash dot dash dash dash
+                    state = 29;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 25;
+                end
+            end
+
+            26: begin    // está em => dash dash dot dot
+                if (dot) begin  // vai para => dash dash dot dot dot
+                    state = 28;
+                end else if (dash) begin // vai para => dash dash dot dot dash
+                    state = 29;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 26;
+                end
+            end
+
+            27: begin    // está em => dash dash dot dash
+                if (dot) begin  // vai para => dash dash dot dash dot
+                    state = 29;
+                end else if (dash) begin // vai para => dash dash dot dash dash
+                    state = 30;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 27;
+                end
+            end
+
+            28: begin    // está em => dash dash dash dot
+                if (dot) begin  // vai para => dash dash dash dot dot
+                    state = 29;
+                end else if (dash) begin // vai para => dash dash dash dot dash
+                    state = 30;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 28;
+                end
+            end
+
+            29: begin    // está em => dash dash dash dash
+                if (dot) begin  // vai para => dash dash dash dash dot
+                    state = 30;
+                end else if (dash) begin // vai para => dash dash dash dash dash
+                    state = 31;
+                end else if (interchar || interword) begin
+                    data_out = 1023;
+                    state = 0;
+                end else begin
+                    state = 29;
+                end
+            end
+            
+            default: begin
+                data_out = 0;
+                state = 0;
+            end 
+        endcase
+    end
+end
+
+endmodule

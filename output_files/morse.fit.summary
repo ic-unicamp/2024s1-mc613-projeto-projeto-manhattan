@@ -1,15 +1,15 @@
-Fitter Status : Successful - Tue Jun 11 13:10:22 2024
+Fitter Status : Successful - Wed Jun 12 14:05:32 2024
 Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 Revision Name : morse
 Top-level Entity Name : morse
 Family : Cyclone V
 Device : 5CSEMA5F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 274 / 32,070 ( < 1 % )
-Total registers : 506
-Total pins : 14 / 457 ( 3 % )
+Logic utilization (in ALMs) : 4,143 / 32,070 ( 13 % )
+Total registers : 7871
+Total pins : 63 / 457 ( 14 % )
 Total virtual pins : 0
-Total block memory bits : 896 / 4,065,280 ( < 1 % )
+Total block memory bits : 768 / 4,065,280 ( < 1 % )
 Total RAM Blocks : 1 / 397 ( < 1 % )
 Total DSP Blocks : 0 / 87 ( 0 % )
 Total HSSI RX PCSs : 0
