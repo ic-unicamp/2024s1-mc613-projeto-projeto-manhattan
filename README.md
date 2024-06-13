@@ -7,7 +7,7 @@ Grupo:
 
 ## Descrição
 
-O projeto consiste no desenvolvimento de um tradutor de código Morse utilizando uma FPGA. O objetivo é receber inputs de pontos (.) e traços (-) a partir do botão key[0] da FPGA e exibir a letra correspondente no monitor, conectado via VGA. 
+O projeto consiste no desenvolvimento de um tradutor de código Morse utilizando uma FPGA. O objetivo é receber inputs de pontos (.) e traços (-) a partir do botão key[0] da FPGA e exibir a letra correspondente no monitor, conectado via VGA. O switch SW0 é responsavel por resetar o o projeto como um todo
 
 Para esse projeto, foram utilizados, além da própria placa FPGA, um cabo USB-B e um cabo VGA.
 
